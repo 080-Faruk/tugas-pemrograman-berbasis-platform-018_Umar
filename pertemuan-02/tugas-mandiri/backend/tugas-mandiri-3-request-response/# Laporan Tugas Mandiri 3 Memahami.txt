@@ -1,0 +1,36 @@
+# Laporan Tugas Mandiri 3: Memahami Request dan Response
+
+**Nama:** Moh Faruq  
+**NIM / Kelas:** 018 / Pemrograman Berbasis Platform  
+**Pertemuan:** 02  
+
+---
+
+## Lampiran Tangkapan Layar Pengujian
+*Berikut adalah tangkapan layar hasil pengujian menggunakan Postman:*
+
+1. **Endpoint `/get?nama=Umar&kelas=TI`**  
+   ![Screenshot Get](screenshot-get.png)
+2. **Endpoint `/headers`**  
+   ![Screenshot Headers](screenshot-headers.png)
+
+---
+
+## Jawaban Pertanyaan Analisis
+
+1. **Apa yang dimaksud dengan permintaan (request), dan pihak mana yang mengirimkannya?**
+   * **Permintaan (Request):** Pesan atau data yang dikirimkan oleh klien (seperti *browser* atau aplikasi Postman) kepada server untuk meminta suatu aksi, data, atau sumber daya tertentu. Pihak yang mengirimkannya adalah **klien**.
+
+2. **Apa yang dimaksud dengan respons (response), dan pihak mana yang mengirimkannya?**
+   * **Respons (Response):** Pesan atau data balasan yang dikembalikan oleh server kepada klien setelah server memproses permintaan yang diterima. Pihak yang mengirimkannya adalah **server**.
+
+3. **Apa fungsi parameter query? Jelaskan menggunakan parameter `nama` dan `kelas` pada tes Anda.**
+   * **Fungsi Query Parameter:** Menyampaikan tambahan data atau informasi pelengkap kepada server melalui URL (setelah tanda tanya `?`). Pada pengujian ini, parameter `nama=Umar` dan `kelas=TI` dikirimkan ke server agar server mengetahui nilai data tersebut dan menampilkannya kembali di bagian respons JSON (pada objek `args`), sehingga server dapat memproses data spesifik sesuai yang diminta klien.
+
+4. **Apa fungsi HTTP header? Sebutkan satu header yang terlihat pada hasil pengujian dan jelaskan informasi yang dimuatnya.**
+   * **Fungsi HTTP Header:** Menyampaikan informasi tambahan atau metadata penting mengenai *request* atau *response* (seperti jenis konten, informasi peramban, token otorisasi, atau ukuran data).
+   * **Contoh Header (`Host`):** Menunjukkan nama domain atau alamat server tujuan tempat permintaan dikirim (misalnya `httpbin.org`).
+
+5. **Apa perbedaan penempatan data pada query parameter di URL dan pada body permintaan?**
+   * **Query Parameter:** Data ditempatkan langsung di dalam URL (terbuka di *address bar*, memiliki batas panjang karakter tertentu), biasanya digunakan pada metode `GET` untuk pencarian atau pemfilteran data.
+   * **Body Permintaan:** Data disembunyikan di dalam badan/isi paket HTTP (tidak terlihat langsung di URL, kapasitas data jauh lebih besar dan aman), biasanya digunakan pada metode `POST`, `PUT`, atau `PATCH` untuk mengirim data baru atau mengubah data sensitif.
