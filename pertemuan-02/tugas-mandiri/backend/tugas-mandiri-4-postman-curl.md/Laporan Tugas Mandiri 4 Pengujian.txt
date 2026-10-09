@@ -1,0 +1,40 @@
+# Laporan Tugas Mandiri 4: Pengujian API dengan Postman dan curl
+
+**Nama:** Moh Faruq  
+**NIM / Kelas:** 018 / Pemrograman Berbasis Platform  
+**Pertemuan:** 02  
+
+---
+
+## A. Perbandingan Respons Postman (GET vs POST)
+* **Permintaan `GET https://httpbin.org/get`:** Menampilkan respons JSON di mana bagian parameter URL akan terlihat di dalam objek `args`.
+* **Permintaan `POST https://httpbin.org/post` (dengan JSON `{"nama": "Umar", "kelas": "Informatika"}`):** Menampilkan respons JSON di mana data yang dikirimkan melalui badan permintaan (*body*) akan terekam dan dikembalikan di dalam objek `json` atau `data`, sementara parameter URL (jika ada) tetap berada di `args`.
+
+---
+
+## B. Pengamatan Perintah curl (`curl -i`)
+* **`curl -i https://httpbin.org/get`:** Menampilkan baris status HTTP (`HTTP/1.1 200 OK`), diikuti oleh kumpulan *header* respons (seperti `Content-Type: application/json` dan `Content-Length`), kemudian diikuti dengan badan respons berupa format JSON di bagian bawah.
+* **`curl -i https://httpbin.org/status/404`:** Menampilkan baris status kesalahan (`HTTP/1.1 404 NOT FOUND`) bersama *header* terkait, menandakan bahwa sumber daya atau endpoint yang diminta tidak ditemukan oleh server.
+
+---
+
+## C. Perbandingan Opsi `curl -s` dan `curl -i`
+
+1. **Perbedaan Hasil:** Perintah `curl -s` hanya mencetak badan respons (*body*) secara murni tanpa menampilkan header atau informasi status protokol, sedangkan `curl -i` menyertakan informasi header lengkap beserta status HTTP di bagian atas sebelum isi badan respons.
+2. **Fungsi Opsi `-s` (Silent):** Menyembunyikan tampilan bilah progres (*progress meter*) dan pesan kesalahan saat proses unduh/permintaan berlangsung.
+3. **Fungsi Opsi `-i` (Include):** Menyertakan metadata header HTTP respons secara lengkap pada keluaran terminal.
+4. **Penggunaan:** Opsi `-s` digunakan ketika kita hanya memerlukan data mentah untuk diproses lebih lanjut oleh sistem/skrip, sedangkan opsi `-i` digunakan saat melakukan *debugging* untuk memeriksa header dan status kode server secara langsung.
+
+---
+
+## Lampiran Tangkapan Layar Pengujian
+*Berikut adalah tangkapan layar hasil pengujian menggunakan Postman dan curl:*
+
+1. **Permintaan GET melalui Postman**  
+   ![Screenshot Postman GET](screenshot-postman-get.png)
+2. **Permintaan POST melalui Postman (dengan JSON)**  
+   ![Screenshot Postman POST](screenshot-postman-post.png)
+3. **Perintah `curl -i`**  
+   ![Screenshot cURL i](screenshot-curl-i.png)
+4. **Perintah `curl -s`**  
+   ![Screenshot cURL s](screenshot-curl-s.png)
