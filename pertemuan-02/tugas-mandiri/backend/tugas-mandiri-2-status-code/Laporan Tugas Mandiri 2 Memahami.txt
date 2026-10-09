@@ -1,0 +1,52 @@
+# Laporan Tugas Mandiri 2: Memahami HTTP Status Code
+
+**Nama:** Moh Faruq  
+**NIM / Kelas:** 018 / Pemrograman Berbasis Platform  
+**Pertemuan:** 02  
+
+---
+
+## Tabel Hasil Pengujian HTTP Status Code
+
+| Kode Status | Status Text | Hasil Pengujian | Kapan Digunakan |
+| :--- | :--- | :--- | :--- |
+| **200** | OK | Berhasil mengembalikan respons sukses standar. | Permintaan berhasil diproses (misal: sukses mengambil data GET dari API). |
+| **201** | Created | Berhasil membuat sumber daya baru di server. | Digunakan setelah operasi POST berhasil menciptakan data baru (misal: registrasi akun baru atau tambah data). |
+| **400** | Bad Request | Permintaan tidak valid atau salah format dari klien. | Digunakan ketika server tidak dapat memahami permintaan karena sintaks atau data JSON yang dikirim rusak/tidak sesuai. |
+| **401** | Unauthorized | Klien belum diautentikasi (belum login). | Digunakan saat mencoba mengakses halaman atau API yang memerlukan login/token akses tetapi pengguna belum memberikannya. |
+| **403** | Forbidden | Akses ditolak meskipun identitas dikenali. | Digunakan ketika pengguna sudah login, tetapi tidak memiliki izin/hak akses untuk membuka sumber daya tersebut (misal: user biasa mencoba membuka halaman admin). |
+| **404** | Not Found | Sumber daya atau URL tidak ditemukan di server. | Digunakan ketika endpoint atau alamat URL yang diminta klien tidak ada di server. |
+| **500** | Internal Server Error | Kesalahan umum pada sisi server. | Digunakan ketika terjadi *bug*, pengecualian (*exception*) yang tidak tertangani, atau kegagalan sistem di server saat memproses permintaan. |
+
+---
+
+## Lampiran Tangkapan Layar Pengujian
+*Berikut adalah tangkapan layar hasil pengujian beberapa kode status menggunakan Postman:*
+
+1. **Status Code 200 (`/status/200`)**  
+   ![Screenshot Status 200](screenshot-status-200.png)
+2. **Status Code 404 (`/status/404`)**  
+   ![Screenshot Status 404](screenshot-status-404.png)
+3. **Status Code 500 (`/status/500`)**  
+   ![Screenshot Status 500](screenshot-status-500.png)
+
+*(Catatan: Sesuaikan nama file gambar `screenshot-*.png` di atas dengan nama file gambar *screenshot* yang Anda simpan di dalam folder).*
+
+---
+
+## Jawaban Pertanyaan Analisis
+
+1. **Apa perbedaan makna kode 400 dan 404? Berikan satu contoh keadaan untuk masing-masing kode.**
+   * **Perbedaan:** Kode **400 (Bad Request)** berarti server memahami permintaan klien tetapi sintaks atau data yang dikirimkan cacat/tidak valid (salah format). Sedangkan kode **404 (Not Found)** berarti permintaan klien sebenarnya memiliki format yang valid, tetapi URL atau sumber daya yang dicari tidak ditemukan di server.
+   * **Contoh 400:** Mengirimkan *payload* JSON tanpa tanda kurung kurawal penutup saat melakukan POST data.
+   * **Contoh 404:** Mengakses URL endpoint API yang salah ketik (misalnya `/api/v1/usrs` alih-alih `/api/v1/users`).
+
+2. **Apa perbedaan makna kode 401 dan 403 dalam pemeriksaan identitas dan hak akses pengguna?**
+   * **Perbedaan:** Kode **401 (Unauthorized)** berkaitan dengan *Autentikasi* (siapa Anda?), yaitu pengguna belum teridentifikasi atau belum login sehingga server menolak memberikan akses. Sementara kode **403 (Forbidden)** berkaitan dengan *Otorisasi* (apa hak Anda?), yaitu identitas pengguna sudah dikenali (sudah login), tetapi pengguna tersebut tidak memiliki izin untuk mengakses sumber daya yang dituju.
+
+3. **Mengapa 500 menunjukkan masalah pada sisi server?**
+   * Kode **500 (Internal Server Error)** termasuk dalam kelompok *5xx server error*, yang artinya server mengalami kegagalan tak terduga (seperti *bug* pada kode program backend, kegagalan koneksi database, atau kehabisan memori) saat mencoba memproses permintaan, sehingga kesalahan bukan disebabkan oleh salahnya data dari pihak klien.
+
+4. **Apakah setiap respons kesalahan HTTP menunjukkan kerusakan pada server? Jelaskan alasan Anda dengan memberikan contoh.**
+   * **Tidak.** Respons kesalahan HTTP terbagi menjadi kelompok *4xx (Client Error)* dan *5xx (Server Error)*. Kesalahan kelompok 4xx menunjukkan bahwa kesalahan ada di pihak klien (pengguna/pengembang aplikasi), bukan kerusakan pada server.
+   * **Contoh:** Ketika klien meminta halaman yang tidak ada (`404 Not Found`) atau mengirimkan format data yang salah (`400 Bad Request`), server berfungsi dengan normal dan merespons dengan benar untuk memberitahu bahwa ada kesalahan pada permintaan klien. Server sama sekali tidak mengalami kerusakan.
